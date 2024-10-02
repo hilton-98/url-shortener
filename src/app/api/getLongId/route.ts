@@ -9,10 +9,7 @@ export async function POST(request: Request) {
   }
 
   const longId = shortToLong[shortId];
-
-  console.log(shortToLong);
-  console.log(longToShort);
-
+  
   if (longId) {
     return NextResponse.json({ longId }, { status: 200 });
   } else {

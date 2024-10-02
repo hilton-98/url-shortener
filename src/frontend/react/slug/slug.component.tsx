@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+import styles from './slug.component.module.css';
 
 interface Props {
    slug: string;
@@ -31,7 +32,7 @@ export function SlugComponent({ slug }: Props) {
    });
 
   return (
-      <div>
+      <div className={styles['container']}>
          <div>
             {phrases.welcome}
          </div>

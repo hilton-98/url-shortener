@@ -4,9 +4,11 @@ import { baseUrl } from "@/frontend/model/baseUrl";
 import { getShortId } from "@/frontend/service/idTranslatorService";
 import { useState } from "react";
 
+import styles from './home.component.module.css';
+
 const phrases = {
    invalidUrlMessage: `Please enter a URL of the form ${baseUrl}{slug}`,
-   shortenedUrl: 'Shortened URL:',
+   shortenedUrl: 'Shortened URL: ',
    submitButton: 'Shorten URL',
    title: 'URL Shortener',
    urlPlaceholder: 'Enter your URL',
@@ -51,9 +53,12 @@ export function HomeComponent() {
   }
 
   return (
-    <div>
+    <div className={styles['container']}>
       <h1>{phrases.title}</h1>
-      <form onSubmit={handleSubmit}>
+      <form 
+        className={styles['input-form']}
+        onSubmit={handleSubmit}
+      >
         <input
           type="url"
           placeholder={phrases.urlPlaceholder}
