@@ -1,4 +1,4 @@
-import { HomeComponent } from "@/react/home.component";
+import { HomeComponent } from "@/react/home/home.component";
 
 export default function Page() {
   return <HomeComponent />

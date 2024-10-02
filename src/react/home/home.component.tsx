@@ -1,9 +1,10 @@
 'use client';
 
+import { baseUrl } from "@/model/baseUrl";
 import { useState } from "react";
 
 const phrases = {
-   invalidUrlMessage: 'Please enter a URL of the form http://localhost:8080/{slug}',
+   invalidUrlMessage: `Please enter a URL of the form ${baseUrl}{slug}`,
    shortenedUrl: 'Shortened URL:',
    submitButton: 'Shorten URL',
    title: 'URL Shortener',
@@ -11,6 +12,7 @@ const phrases = {
 } as const;
 
 export function HomeComponent() {
+
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
   const [url, setUrl] = useState<string>("");
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
@@ -30,16 +32,18 @@ export function HomeComponent() {
       setErrorMessage(undefined);
    }
 
-    const res = await fetch("/api/shorten", {
+    const longId = url.replace(baseUrl, '');
+
+    const response = await fetch("/api/getShortId", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ url }),
+      body: JSON.stringify({ longId }),
     });
 
-    const data = await res.json();
-    setShortenedUrl(data.shortUrl);
+    const data = await response.json();
+    setShortenedUrl(`${baseUrl}${data.shortId}`);
   };
 
   const ErrorMessage = () => {
