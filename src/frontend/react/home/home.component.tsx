@@ -1,6 +1,7 @@
 'use client';
 
-import { baseUrl } from "@/model/baseUrl";
+import { baseUrl } from "@/frontend/model/baseUrl";
+import { getShortId } from "@/frontend/service/idTranslatorService";
 import { useState } from "react";
 
 const phrases = {
@@ -20,7 +21,7 @@ export function HomeComponent() {
   const isValidUrl = (url: string) => {
    const urlPattern = /^http:\/\/localhost:8080\/[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]+$/;
    return urlPattern.test(url);
-}
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ) => {
     e.preventDefault();
@@ -33,17 +34,12 @@ export function HomeComponent() {
    }
 
     const longId = url.replace(baseUrl, '');
-
-    const response = await fetch("/api/getShortId", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ longId }),
-    });
-
-    const data = await response.json();
-    setShortenedUrl(`${baseUrl}${data.shortId}`);
+    const response = await getShortId(longId);
+    if (response.success) {
+      setShortenedUrl(`${baseUrl}${response.shortId}`);
+    } else {
+      setErrorMessage(response.message);
+    }
   };
 
   const ErrorMessage = () => {

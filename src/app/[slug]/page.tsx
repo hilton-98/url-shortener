@@ -1,4 +1,4 @@
-import { SlugComponent } from "@/react/slug/slug.component";
+import { SlugComponent } from "@/frontend/react/slug/slug.component";
 
 interface Props {
    params: {
