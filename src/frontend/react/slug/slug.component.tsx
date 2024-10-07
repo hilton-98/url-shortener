@@ -23,7 +23,6 @@ export function SlugComponent({ slug }: Props) {
    useEffect(() => {
       async function validateUrl() {
          const response = await getLongId(slug);
-
           if (response.success) {
             router.push(response.longId as string);
           }

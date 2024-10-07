@@ -7,7 +7,7 @@ import { useState } from "react";
 import styles from './home.component.module.css';
 
 const phrases = {
-   invalidUrlMessage: `Please enter a URL of the form ${baseUrl}{slug}`,
+   invalidUrlMessage: `Please enter a valid URL`,
    shortenedUrl: 'Shortened URL: ',
    submitButton: 'Shorten URL',
    title: 'URL Shortener',
@@ -21,7 +21,7 @@ export function HomeComponent() {
   const [shortenedUrl, setShortenedUrl] = useState<string>("");
 
   const isValidUrl = (url: string) => {
-   const urlPattern = /^http:\/\/localhost:8080\/[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]+$/;
+   const urlPattern = /^https?:\/\/[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]+$/;
    return urlPattern.test(url);
   }
 
